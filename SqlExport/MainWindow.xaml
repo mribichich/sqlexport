@@ -1,0 +1,91 @@
+﻿<Window x:Class="SqlExport.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SqlExport"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="Auto" Width="400" SizeToContent="Height">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+            <Setter Property="Margin" Value="0,20,0,0"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+    </Window.Resources>
+
+    <StackPanel>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0">Fecha Desde</TextBlock>
+            <DatePicker Grid.Row="0" Grid.Column="1" Name="DateFromPicker"></DatePicker>
+
+            <TextBlock Grid.Row="1" Grid.Column="0">Fecha Hasta</TextBlock>
+            <DatePicker Grid.Row="1" Grid.Column="1" Name="DateToPicker"></DatePicker>
+        </Grid>
+
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Name="GenerateBtn" Click="GenerateBtnOnClick">Generar Reporte</Button>
+        </Grid>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0">Mail Para</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" Name="MailToTextBox"></TextBox>
+        </Grid>
+
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Name="SendMailBtn" Click="SendMailBtnOnClick">Mandar Reporte</Button>
+        </Grid>
+
+            <TextBlock Grid.Row="1"
+                       Name="ReadyLabel" 
+                       HorizontalAlignment="Center" 
+                       TextWrapping="Wrap" 
+                       Visibility="Collapsed">
+                Listo!
+            </TextBlock>
+    </StackPanel>
+</Window>
