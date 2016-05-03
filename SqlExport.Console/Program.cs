@@ -90,7 +90,16 @@
 
             Console.WriteLine($"Enviando mail a {mailTo} ...");
 
-            Helpers.SendMailAsync(mailTo, fileName)
+            var mailsTo = mailTo.Split(
+                new[]
+                    {
+                        ";"
+                    },
+                StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s.Trim())
+                .ToArray();
+
+            Helpers.SendMailAsync(mailsTo, fileName)
                 .Wait();
 
             Console.WriteLine("Mail enviado");

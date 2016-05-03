@@ -115,7 +115,16 @@ namespace SqlExport
                  {
                      try
                      {
-                         await Helpers.SendMailAsync(mailTo, fileName);
+                         var mailsTo = mailTo.Split(
+                             new[]
+                                 {
+                        ";"
+                                 },
+                             StringSplitOptions.RemoveEmptyEntries)
+                             .Select(s => s.Trim())
+                             .ToArray();
+
+                         await Helpers.SendMailAsync(mailsTo, fileName);
 
                          this.Dispatcher.Invoke(() => this.ReadyLabel.Text = "Mail enviado");
                      }

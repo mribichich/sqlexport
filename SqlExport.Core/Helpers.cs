@@ -27,7 +27,7 @@
             return Path.Combine(Environment.CurrentDirectory, GetFileName(fromDateTime, toDateTime));
         }
 
-        public static Task SendMailAsync(string mailTo, string fileName)
+        public static Task SendMailAsync(string[] mailTo, string fileName)
         {
             var myMessage = new SendGridMessage();
             myMessage.AddTo(mailTo);
