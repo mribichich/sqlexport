@@ -110,6 +110,8 @@ namespace SqlExport
 
             this.ReadyLabel.Text = "Enviando mail...";
 
+            var fromDateTime = this.DateFromPicker.SelectedDate.Value;
+
             Task.Run(
                  async delegate ()
                  {
@@ -124,7 +126,9 @@ namespace SqlExport
                              .Select(s => s.Trim())
                              .ToArray();
 
-                         await Helpers.SendMailAsync(mailsTo, fileName);
+                         var subject = Helpers.GetEmailSubject(fromDateTime);
+
+                         await Helpers.SendMailAsync(mailsTo, subject, fileName);
 
                          this.Dispatcher.Invoke(() => this.ReadyLabel.Text = "Mail enviado");
                      }

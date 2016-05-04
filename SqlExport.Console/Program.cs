@@ -99,7 +99,9 @@
                 .Select(s => s.Trim())
                 .ToArray();
 
-            Helpers.SendMailAsync(mailsTo, fileName)
+            var subject = Helpers.GetEmailSubject(fromDateTime);
+
+            Helpers.SendMailAsync(mailsTo, subject, fileName)
                 .Wait();
 
             Console.WriteLine("Mail enviado");

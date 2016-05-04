@@ -17,9 +17,16 @@
     {
         public static string GetFileName(DateTime fromDateTime, DateTime toDateTime)
         {
-            return $"Reporte Comidas {fromDateTime.ToShortDateString()} al {toDateTime.ToShortDateString()} ({DateTime.Now.ToString("s")}).csv"
-                 .Replace("/", "-")
-                 .Replace(":", "-");
+            return $"Fichadas{fromDateTime.ToString("yyMMdd")}.csv";
+
+            ////return $"Fichadas{fromDateTime.ToShortDateString()} al {toDateTime.ToShortDateString()} ({DateTime.Now.ToString("s")}).csv"
+            ////     .Replace("/", "-")
+            ////     .Replace(":", "-");
+        }
+
+        public static string GetEmailSubject(DateTime fromDateTime)
+        {
+            return $"Reporte de fichadas correspondientes al dia {fromDateTime.ToString("yyMMdd")}";
         }
 
         public static string GetFileFullPath(DateTime fromDateTime, DateTime toDateTime)
@@ -27,12 +34,12 @@
             return Path.Combine(Environment.CurrentDirectory, GetFileName(fromDateTime, toDateTime));
         }
 
-        public static Task SendMailAsync(string[] mailTo, string fileName)
+        public static Task SendMailAsync(string[] mailTo, string subject, string fileName)
         {
             var myMessage = new SendGridMessage();
             myMessage.AddTo(mailTo);
             myMessage.From = new MailAddress(ConfigurationManager.AppSettings["MailMessageFromEmail"], ConfigurationManager.AppSettings["MailMessageFromName"]);
-            myMessage.Subject = "Reporte Comidas";
+            myMessage.Subject = subject;
             myMessage.Text = myMessage.Subject;
             myMessage.Attachments = new[]
                 {
